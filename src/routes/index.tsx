@@ -20,7 +20,7 @@ export default function Home() {
 	}
 
 	return (
-		<div class="flex flex-col gap-y-10 justify-center items-center w-screen h-screen bg-zinc-900 text-zinc-50">
+		<div class="flex flex-col items-center w-screen h-screen bg-zinc-900 text-zinc-50 px-2 py-16  gap-y-4 sm:p-6 md:p-8 md:gap-y-10 md:justify-center">
 			{playPosition() && (
 				<TileTypeSelectionModal
 					currentPlayer={currentPlayer()}
@@ -30,7 +30,7 @@ export default function Home() {
 			)}
 			<ScoreTiles currentPlayer={currentPlayer()} points={points()} />
 			<div
-				class="relative w-[1000px] h-[1000px] grid gap-0.5"
+				class="relative w-full h-[90vw] grid gap-0.5 xl:w-[50vw] xl:h-[50vw]"
 				style={{ "grid-template-columns": `repeat(${BOARD_SIZE}, minmax(0, 1fr))` }}
 			>
 				{storage().map((row, i) =>

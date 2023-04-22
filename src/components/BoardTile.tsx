@@ -1,4 +1,3 @@
-import { Accessor } from "solid-js";
 import { Player, TileData } from "~/util/createBoard";
 
 export interface BoardTileProps {
@@ -10,7 +9,7 @@ export interface BoardTileProps {
 export default function BoardTile(props: BoardTileProps) {
 	return (
 		<button
-			class="relative w-full h-full border-4 rounded-lg transition-all"
+			class="relative w-full h-full border rounded-lg transition-all md:border-2 xl:border-4"
 			classList={{
 				"hover:bg-p1-primary/10":
 					props.value.player === undefined && props.currentPlayer === "player1",
@@ -24,7 +23,7 @@ export default function BoardTile(props: BoardTileProps) {
 			}}
 			onClick={props.onClick}
 		>
-			<span class="absolute top-0 left-0 w-full h-full flex justify-center items-center text-4xl font-bold">
+			<span class="absolute top-0 left-0 w-full h-full flex justify-center items-center text-2xl sm:text-3xl md:text-4xl font-bold">
 				{props.value.type}
 			</span>
 		</button>
