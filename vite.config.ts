@@ -1,12 +1,12 @@
 import solid from "solid-start/vite";
 import { defineConfig } from "vite";
 import devtools from "solid-devtools/vite";
-import vercelAdapter from "solid-start-vercel";
+import cloudflareAdapter from "solid-start-cloudflare-pages";
 
 export default defineConfig({
 	plugins: [
 		solid({
-			adapter: vercelAdapter({ edge: true }),
+			adapter: cloudflareAdapter({ edge: true }),
 		}),
 		devtools({
 			autoname: true,
