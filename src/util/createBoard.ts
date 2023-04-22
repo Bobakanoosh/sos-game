@@ -16,17 +16,13 @@ export function createBoard(width: number, height: number) {
 	const [points, setPoints] = createSignal({ player1: 0, player2: 0 });
 
 	function initializeBoard(): void {
-		setStorage(Array.from({ length: height }, () => Array(width).fill({ player: undefined, type: "" })));
+		setStorage(
+			Array.from({ length: height }, () => Array(width).fill({ player: undefined, type: "" }))
+		);
 	}
 
 	function play(x: number, y: number, type: TileTypePlayable) {
-		if (x < 0 || x >= width || y < 0 || y >= height) {
-			throw new Error("Coordinates are out of bounds");
-		}
-
-		if (storage()[x][y].player) {
-			throw new Error("Tile already played");
-		}
+		assertCanPlay(x, y);
 
 		setStorage((curr) => {
 			curr[x][y] = { player: currentPlayer(), type };
@@ -42,6 +38,16 @@ export function createBoard(width: number, height: number) {
 			curr[currentPlayer()] += points;
 			return { ...curr };
 		});
+	}
+
+	function assertCanPlay(x: number, y: number) {
+		if (x < 0 || x >= width || y < 0 || y >= height) {
+			throw new Error("Coordinates are out of bounds");
+		}
+
+		if (storage()[x][y].player) {
+			throw new Error("Tile already played");
+		}
 	}
 
 	/**
@@ -178,5 +184,6 @@ export function createBoard(width: number, height: number) {
 		play,
 		currentPlayer,
 		points,
+		assertCanPlay,
 	};
 }

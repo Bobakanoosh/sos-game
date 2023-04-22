@@ -34,7 +34,7 @@ function Button(props: Button) {
 	const { type, currentPlayer, onClick } = props;
 	return (
 		<button
-			class="bg-blue-500 w-16 h-16 text-4xl font-bold rounded-md text-zinc-50 hover:scale-110 transition-all duration-200"
+			class=" w-16 h-16 text-4xl font-bold rounded-md text-zinc-50 hover:scale-110 transition-all duration-200"
 			classList={{
 				"bg-p1-primary": currentPlayer === "player1",
 				"bg-p2-primary": currentPlayer === "player2",

@@ -7,7 +7,10 @@ import { TileTypePlayable, createBoard } from "~/util/createBoard";
 const BOARD_SIZE = 10;
 
 export default function Home() {
-	const { storage, play, currentPlayer, points } = createBoard(BOARD_SIZE, BOARD_SIZE);
+	const { storage, play, currentPlayer, points, assertCanPlay } = createBoard(
+		BOARD_SIZE,
+		BOARD_SIZE
+	);
 	const [playPosition, setPlayPosition] = createSignal<{ x: number; y: number } | null>(null);
 
 	function confirmPlay(tileType: TileTypePlayable) {
@@ -18,6 +21,16 @@ export default function Home() {
 			setPlayPosition(null);
 		}
 	}
+
+	function boardTileClicked(x: number, y: number) {
+		try {
+			assertCanPlay(x, y);
+			setPlayPosition({ x, y });
+		} catch (e) {}
+	}
+
+	// TODO finished state
+	// TODO restart button
 
 	return (
 		<div class="flex flex-col items-center w-screen h-screen bg-zinc-900 text-zinc-50 px-2 py-16  gap-y-4 sm:p-6 md:p-8 md:gap-y-10 md:justify-center">
@@ -39,7 +52,7 @@ export default function Home() {
 							<BoardTile
 								value={cell}
 								currentPlayer={currentPlayer()}
-								onClick={() => setPlayPosition({ x: i, y: j })}
+								onClick={() => boardTileClicked(i, j)}
 							/>
 						</>
 					))
